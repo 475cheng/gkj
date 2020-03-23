@@ -104,9 +104,9 @@ public class HomePageController {
             double p2 = user.getNodeStatusCredibility2() / totleRequest;
             p3 = user.getNodeStatusCredibility3() / totleRequest;
 
-            double m = 0.5 * a + 0.5 * p1;
-            double n = 0.5 * b + 0.5 * p2;
-            double k = 0.5 * c + 0.5 * p3;
+            double m = 0.3 * a + 0.7 * p1;
+            double n = 0.3 * b + 0.7 * p2;
+            double k = 0.3 * c + 0.7 * p3;
             if (m > n && m > k) {
                 totle_credibility = 1;
                 user.setTotleCredibility1(user.getTotleCredibility1() + 1);
