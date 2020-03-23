@@ -17,13 +17,13 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query(value = "select a.* from (select * from request_information where user_id in (\n" +
             "select b1.user_id from (\n" +
-            "select user_id,count(id) c from request_information \n" +
+            "select user_id,count(id) c from request_information and bridge_node_id!=0 \n" +
             "GROUP BY user_id\n" +
-            "HAVING c>5) b1 )) a left join (select * from request_information where user_id in (\n" +
+            "HAVING c>5) b1 ) and bridge_node_id!=0 ) a left join (select * from request_information where user_id in (\n" +
             "select b1.user_id from (\n" +
-            "select user_id,count(id) c from request_information \n" +
+            "select user_id,count(id) c from request_information and bridge_node_id!=0 \n" +
             "GROUP BY user_id\n" +
-            "HAVING c>5) b1 )) b\n" +
+            "HAVING c>5) b1 ) and bridge_node_id!=0 ) b\n" +
             "on a.user_id=b.user_id and a.id<=b.id\n" +
             "group by a.user_id,a.id\n" +
             " having count(a.id)<=3", nativeQuery = true)
