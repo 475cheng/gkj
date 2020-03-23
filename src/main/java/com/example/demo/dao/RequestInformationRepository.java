@@ -15,13 +15,14 @@ public interface RequestInformationRepository extends JpaRepository<RequestInfor
 
     @Modifying
     @Transactional
-    @Query(value = "update request_information set is_deal=1 where id in (select a.id from (select id from request_information where user_id=?1 ORDER BY create_time desc limit 3) a) ", nativeQuery = true)
+    @Query(value = "update request_information set is_deal=1 where id in (select a.id from (select id from request_information where user_id=?1 and bridge_node_id!=0  ORDER BY create_time desc limit 3) a) ", nativeQuery = true)
     int updateDeal(Integer userId);
 
     @Modifying
     @Transactional
-    @Query(value = "update request_information set is_used=1 where id in (select a.id from (select id from request_information where user_id=?1 ORDER BY create_time desc limit 3) a) ", nativeQuery = true)
+    @Query(value = "update request_information set is_used=1 where id in (select a.id from (select id from request_information where user_id=?1 and bridge_node_id!=0  ORDER BY create_time desc limit 3) a) ", nativeQuery = true)
     int updateIsValid(Integer userId);
 
+    @Query(value = "select * from request_information where user_id = ?1 and bridge_node_id!=0 ", nativeQuery = true)
     List<RequestInformation> findByUserId(Integer userId);
 }

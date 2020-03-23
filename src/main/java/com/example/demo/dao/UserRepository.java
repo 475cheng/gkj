@@ -30,17 +30,17 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     Object[] queryZcUsers();
 
     @Query(value = "select a.* from request_information a left join request_information b\n" +
-            "on a.user_id=b.user_id and a.id<=b.id\n" +
+            "on a.user_id=b.user_id and a.id<=b.id where a.bridge_node_id!=0 and b.bridge_node_id!=0 \n" +
             "group by a.user_id,a.id\n" +
             " having count(a.id)<=3", nativeQuery = true)
     Object[] queryZcUserssss();
 
     @Query(value = "select COUNT(1) from request_information where user_id= ?1" +
-            " and apply_credibility=?2 and node_status_credibility=?3 and totle_credibility=?4", nativeQuery = true)
+            " and apply_credibility=?2 and node_status_credibility=?3 and totle_credibility=?4 and bridge_node_id!=0 ", nativeQuery = true)
     int queryTotleCredibility1(Integer userId, Integer apply_credibility, Integer node_status_credibility, Integer totle_credibility);
 
     @Query(value = "select COUNT(1) from request_information where user_id= ?1" +
-            " and apply_credibility=?2 and node_status_credibility=?3", nativeQuery = true)
+            " and apply_credibility=?2 and node_status_credibility=?3 and bridge_node_id!=0", nativeQuery = true)
     int queryTotle(Integer userId, Integer apply_credibility, Integer node_status_credibility);
 
     @Modifying
