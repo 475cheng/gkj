@@ -316,8 +316,11 @@ public class HomePageController {
             userRepository.updateNodeStatusCredibilityOne(dbList);
         }
         if (dbList.size() == 0 && listList.size() == 0) {
-            userRepository.updateNodeStatusCredibilityOneAll();
-            returnInt = 1;
+            List<RequestInformation> byUserId = requestInformationRepository.findByUserId(Integer.parseInt(newUserId));
+            if (byUserId != null && byUserId.size() > 0) {
+                userRepository.updateNodeStatusCredibilityOneAll();
+                returnInt = 1;
+            }
         }
         return returnInt;
     }
