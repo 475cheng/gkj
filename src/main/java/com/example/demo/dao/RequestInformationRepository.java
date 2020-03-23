@@ -15,7 +15,7 @@ public interface RequestInformationRepository extends JpaRepository<RequestInfor
 
     @Modifying
     @Transactional
-    @Query(value = "update request_information set is_deal=0 where id in (select a.id from (select id from request_information where user_id=?1 ORDER BY create_time desc limit 3) a) ", nativeQuery = true)
+    @Query(value = "update request_information set is_deal=1 where id in (select a.id from (select id from request_information where user_id=?1 ORDER BY create_time desc limit 3) a) ", nativeQuery = true)
     int updateDeal(Integer userId);
 
     @Modifying
