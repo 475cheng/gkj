@@ -62,6 +62,11 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Modifying
     @Transactional
+    @Query(value = "update user set node_status_credibility_1=node_status_credibility_1+1 ", nativeQuery = true)
+    int updateNodeStatusCredibilityOneAll();
+
+    @Modifying
+    @Transactional
     @Query(value = "update user set totle_request=totle_request+1 where id = ?1 ", nativeQuery = true)
     int updateNodeStatusAdd1(Integer userId);
 }

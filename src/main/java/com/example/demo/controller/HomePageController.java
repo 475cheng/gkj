@@ -315,6 +315,10 @@ public class HomePageController {
             }
             userRepository.updateNodeStatusCredibilityOne(dbList);
         }
+        if (dbList.size() == 0 && listList.size() == 0) {
+            userRepository.updateNodeStatusCredibilityOneAll();
+            returnInt = 1;
+        }
         return returnInt;
     }
 
