@@ -84,9 +84,9 @@ public class HomePageController {
             user.setCreateTime(new Date());
         } else {
             double l = user.getTotleRequest() + 1;
-            double a = user.getUsedNumber() / l;
-            double b = 1 / l;
-            double c = (user.getTotleRequest() - user.getUsedNumber()) / l;
+            double a = (double)user.getUsedNumber() / l;
+            double b = (double)1 / l;
+            double c = (double)(user.getTotleRequest() - user.getUsedNumber()) / l;
             if (a > b && a > c) {
                 apply_credibility = 1;
                 user.setApplyCredibility1(user.getApplyCredibility1() + 1);
@@ -100,13 +100,13 @@ public class HomePageController {
                 user.setApplyCredibility3(user.getApplyCredibility3() + 1);
             }
             Integer totleRequest = user.getTotleRequest();
-            double p1 = user.getNodeStatusCredibility1() / totleRequest;
-            double p2 = user.getNodeStatusCredibility2() / totleRequest;
-            p3 = user.getNodeStatusCredibility3() / totleRequest;
+            double p1 = (double)user.getNodeStatusCredibility1() / totleRequest;
+            double p2 = (double)user.getNodeStatusCredibility2() / totleRequest;
+            p3 = (double)user.getNodeStatusCredibility3() / totleRequest;
 
-            double m = 0.3 * a + 0.7 * p1;
-            double n = 0.3 * b + 0.7 * p2;
-            double k = 0.3 * c + 0.7 * p3;
+            double m = 0.5 * a + 0.5 * p1;
+            double n = 0.5 * b + 0.5 * p2;
+            double k = 0.5 * c + 0.5 * p3;
             if (m > n && m > k) {
                 totle_credibility = 1;
                 user.setTotleCredibility1(user.getTotleCredibility1() + 1);
@@ -131,10 +131,10 @@ public class HomePageController {
         int w = userRepository.queryTotle(user.getId(), apply_credibility, node_status_credibility);
         StringBuilder stringBuilder = new StringBuilder();
         if (w != 0) {
-            double p4 = x / w;
-            double p5 = y / w;
-            double p6 = z / w;
-            if (p3 >= 0.5) {
+            double p4 = (double)x / w;
+            double p5 = (double)y / w;
+            double p6 = (double)z / w;
+            if (p3 >= 0.4) {
                 RequestInformation requestInformation = new RequestInformation();
                 requestInformation.setApplyCredibility(apply_credibility);
                 requestInformation.setNodeStatusCredibility(node_status_credibility);
