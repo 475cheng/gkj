@@ -86,7 +86,7 @@ public class HomePageController {
             double l = user.getTotleRequest() + 1;
             double a = user.getUsedNumber() / l;
             double b = 1 / l;
-            double c = user.getTotleRequest() - user.getUsedNumber() / l;
+            double c = (user.getTotleRequest() - user.getUsedNumber()) / l;
             if (a > b && a > c) {
                 apply_credibility = 1;
                 user.setApplyCredibility1(user.getApplyCredibility1() + 1);
@@ -134,7 +134,7 @@ public class HomePageController {
             double p4 = x / w;
             double p5 = y / w;
             double p6 = z / w;
-            if (p3 > 0.8) {
+            if (p3 >= 0.5) {
                 RequestInformation requestInformation = new RequestInformation();
                 requestInformation.setApplyCredibility(apply_credibility);
                 requestInformation.setNodeStatusCredibility(node_status_credibility);
