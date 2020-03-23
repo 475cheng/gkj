@@ -8,19 +8,27 @@
     <title>首页</title>
     <script th:src="@{/js/jquery.min.js}"></script>
     <script>
+        var flag = 0;
         function applyIp() {
+            flag = 1;
             var userName = $("#userName").val();
             $.get("/homepage/applyIp?userName=" + userName, function (res) {
                 $("#wenben").html(res);
             });
         }
         function useIp() {
-            // requestInformation 使用改为1
-            var userName = $("#userName").val();
-            $.get("/homepage/useIp?userName=" + userName, function (res) {
-                //$("#wenben").html(res);
-            });
-            alert("使用成功");
+            if (flag == 2) {
+                alert("不可重复使用");
+            } else {
+                // requestInformation 使用改为1
+                var userName = $("#userName").val();
+                $.get("/homepage/useIp?userName=" + userName, function (res) {
+                    //$("#wenben").html(res);
+                });
+                flag = 2;
+                alert("使用成功");
+            }
+
         }
         function dealIp() {
             //requestInformation 处置改为1 ，bridge_node 可用改为0
@@ -36,6 +44,7 @@
 用户名：<input name="userName" id="userName"/>
 <button onclick="applyIp()">申请</button>
 <p id="wenben"></p>
-<button onclick="useIp()">使用</button> <button onclick="dealIp()">处置</button>
+<button onclick="useIp()">使用</button>
+<button onclick="dealIp()">处置</button>
 </body>
 </html>
