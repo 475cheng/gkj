@@ -308,6 +308,13 @@ public class HomePageController {
             }
             userRepository.updateNodeStatusCredibilityTwo(dbList);
         }
+        List<RequestInformation> byUserId = requestInformationRepository.findByUserId(Integer.parseInt(newUserId));
+        if (byUserId != null && byUserId.size() == 0) {
+            returnInt = 2;
+            List<String> hh = new ArrayList<>();
+            hh.add(newUserId);
+            userRepository.updateNodeStatusCredibilityTwo(hh);
+        }
         dbList.addAll(listList);
         if (dbList.size() > 0) {
             if (!dbList.contains(newUserId)) {
@@ -316,7 +323,6 @@ public class HomePageController {
             userRepository.updateNodeStatusCredibilityOne(dbList);
         }
         if (dbList.size() == 0 && listList.size() == 0) {
-            List<RequestInformation> byUserId = requestInformationRepository.findByUserId(Integer.parseInt(newUserId));
             if (byUserId != null && byUserId.size() > 0) {
                 userRepository.updateNodeStatusCredibilityOneAll();
                 returnInt = 1;
