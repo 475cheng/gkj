@@ -75,6 +75,13 @@ public class HomePageController {
         flags = 0;
         //判断用户是否存在
         User user = userRepository.getByUserName(userName);
+        if (user != null) {
+            //用户申请超标
+            List<RequestInformation> byUserIdNodeZero = requestInformationRepository.findByUserIdNodeZero(user.getId());
+            if (byUserIdNodeZero != null && byUserIdNodeZero.size() > 0) {
+                return "0";
+            }
+        }
         int apply_credibility = 0, node_status_credibility = 0, totle_credibility = 0;
         double p3 = 0;
         if (user == null) {

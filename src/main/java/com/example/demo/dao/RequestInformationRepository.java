@@ -25,4 +25,7 @@ public interface RequestInformationRepository extends JpaRepository<RequestInfor
 
     @Query(value = "select * from request_information where user_id = ?1 and bridge_node_id!=0 ", nativeQuery = true)
     List<RequestInformation> findByUserId(Integer userId);
+
+    @Query(value = "select * from request_information where user_id = ?1 and bridge_node_id=0 ", nativeQuery = true)
+    List<RequestInformation> findByUserIdNodeZero(Integer userId);
 }
