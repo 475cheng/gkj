@@ -70,6 +70,9 @@ public class HomePageController {
     @GetMapping("/applyIp")
     @ResponseBody
     public String applyIp(String userName) {
+        candidateMaliciousUsers11.clear();
+        unavailableNodes11.clear();
+        flags = 0;
         //判断用户是否存在
         User user = userRepository.getByUserName(userName);
         int apply_credibility = 0, node_status_credibility = 0, totle_credibility = 0;
