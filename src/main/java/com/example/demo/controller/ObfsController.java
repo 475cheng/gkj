@@ -25,12 +25,17 @@ public class ObfsController {
     @GetMapping("/list")
     @ResponseBody
     public String list() {
+        Integer integer = queryCountDisHost();
+        return String.valueOf(integer);
+    }
+
+    public Integer queryCountDisHost() {
         List<String> bridgeNodes = obfs4gmailRepository.queryAllDisUserName();
         Random random = new Random();
         int i = random.nextInt(bridgeNodes.size() - 10);
         List<String> list = bridgeNodes.subList(i, i + 10);
         Integer integer = obfs4gmailRepository.queryCountDisHost(list);
         System.out.println("去重host: " + integer);
-        return String.valueOf(integer);
+        return integer;
     }
 }
