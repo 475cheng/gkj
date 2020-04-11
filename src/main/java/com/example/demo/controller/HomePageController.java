@@ -76,6 +76,10 @@ public class HomePageController {
         //判断用户是否存在
         User user = userRepository.getByUserName(userName);
         if (user != null) {
+            int byUserIdIsValid = requestInformationRepository.findByUserIdIsValid(user.getId());
+            if (byUserIdIsValid > 0) {
+                return "0";
+            }
             //用户申请超标
             List<RequestInformation> byUserIdNodeZero = requestInformationRepository.findByUserIdNodeZero(user.getId());
             if (byUserIdNodeZero != null && byUserIdNodeZero.size() > 0) {

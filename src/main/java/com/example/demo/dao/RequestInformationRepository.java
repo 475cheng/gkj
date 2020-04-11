@@ -28,4 +28,8 @@ public interface RequestInformationRepository extends JpaRepository<RequestInfor
 
     @Query(value = "select * from request_information where user_id = ?1 and bridge_node_id=0 ", nativeQuery = true)
     List<RequestInformation> findByUserIdNodeZero(Integer userId);
+
+    @Query(value = "select count(1) from request_information r LEFT JOIN bridge_node b on r.bridge_node_id=b.id " +
+            "where r.user_id=?1 and b.is_valid=1", nativeQuery = true)
+    int findByUserIdIsValid(Integer userId);
 }
