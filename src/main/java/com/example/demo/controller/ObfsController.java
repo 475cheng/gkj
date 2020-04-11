@@ -43,5 +43,4 @@ public class ObfsController {
         System.out.println("去重host: " + integer);
         return integer;
     }
-
 }
